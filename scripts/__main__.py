@@ -1,5 +1,5 @@
 """
-This fifle allow us to run the code as just 
+This file allow us to run the code as just 
 python scripts 'config_path' n_experiments
 """
 

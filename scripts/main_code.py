@@ -223,13 +223,17 @@ def main():
         else:
             filemode = "a"
         os.makedirs(os.path.dirname(logging_path), exist_ok=True)
-        logging.basicConfig(level=logging.INFO, filename=logging_path, filemode=filemode, force=True)
+        logging.basicConfig(level=logging.INFO, filename=logging_path,
+                            filemode=filemode, force=True)
         sys.excepthook = handle_exception
 
     # Only use this if you know your code does what you expect it to do!
     # It disables non-error logging from HugginFace, torch, and cuda
     # It also disables UserWarnings from torch.nn
-    if ("huggingface_logging" in config["logging"].keys()) and not config["logging"]["huggingface_logging"]:
+    if (
+        ("huggingface_logging" in config["logging"].keys())
+        and not config["logging"]["huggingface_logging"]
+       ):
         logging.warning("Logging and warning from Huggingface, torch, and cuda are turned off.")
         set_global_logging_level(logging.ERROR, ["transformers", "datasets", "torch", "cuda"])
         warnings.filterwarnings(action='ignore', category=UserWarning, module='torch.nn')
